@@ -4,14 +4,13 @@ const String = @import("string").String;
 const lib = @import("../lib.zig");
 
 const Allocator = std.mem.Allocator;
-const GeneralPurposeAllocator = std.heap.GeneralPurposeAllocator(.{});
 
 pub fn run(a: Allocator) !String {
     var input = try lib.getInput(a, 2024, 1);
     const lines = try input.splitAllToStrings("\n");
-    var lefts = try a.alloc([5]u8, lines.len - 1);
-    var rights = try a.alloc([5]u8, lines.len - 1);
-    for (lines[0 .. lines.len - 1], 0..) |line, i| {
+    var lefts = try a.alloc([5]u8, lines.len);
+    var rights = try a.alloc([5]u8, lines.len);
+    for (lines, 0..) |line, i| {
         const pair = try line.splitAll(" ");
         std.debug.assert(pair.len == 4);
         std.mem.copyForwards(u8, &lefts[i], pair[0]);
