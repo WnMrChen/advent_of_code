@@ -17,6 +17,7 @@ pub fn run(a: Allocator) !String {
     return try String.init_with_contents(a, try std.fmt.allocPrint(a, "{d}", .{count}));
 }
 
+//error
 pub fn extra(a: Allocator) !String {
     var input = try lib.getInput(a, 2024, 2);
     const lines = try input.lines();
